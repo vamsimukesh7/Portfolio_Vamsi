@@ -59,6 +59,9 @@
         --display: "Syne", system-ui;
         --body: "IBM Plex Serif", Georgia, serif;
         --mono: "IBM Plex Mono", monospace;
+
+        /* Fixed nav height, used for scroll offsets everywhere */
+        --nav-height: 56px;
       }
 
       * {
@@ -69,6 +72,7 @@
 
       html {
         scroll-behavior: smooth;
+        scroll-padding-top: var(--nav-height);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
@@ -124,9 +128,10 @@
         top: 0;
         left: 0;
         right: 0;
-        height: 56px;
-        background: rgba(248, 247, 245, 0.85);
-        backdrop-filter: blur(12px);
+        height: var(--nav-height);
+        /* Solid background instead of translucent+blur: avoids the
+       backdrop-filter compositing/ghosting artifact on scroll. */
+        background: var(--paper);
         border-bottom: 1px solid var(--border-dim);
         z-index: 1000;
         font-family: var(--mono);
@@ -134,6 +139,10 @@
         letter-spacing: 0.08em;
         text-transform: uppercase;
         font-weight: 500;
+        /* Force its own compositing layer so it never blurs/bleeds
+       into content scrolling underneath it. */
+        transform: translateZ(0);
+        will-change: transform;
       }
 
       nav .container {
@@ -214,29 +223,28 @@
       /* ============ HERO ============ */
       header {
         padding: 120px 0 80px;
-        margin-top: 56px;
+        margin-top: var(--nav-height);
         border-bottom: 1px solid var(--border);
+      }
+
+      @media (max-width: 768px) {
+        header {
+          padding: 64px 0 56px;
+        }
       }
 
       .hero-content {
         display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 60px;
-        align-items: center;
-      }
-
-      @media (max-width: 768px) {
-        .hero-content {
-          grid-template-columns: 1fr;
-          gap: 40px;
-        }
+        grid-template-columns: 1fr;
+        gap: 40px;
+        align-items: start;
       }
 
       .hero-left h1 {
         font-family: var(--display);
-        font-size: clamp(40px, 6vw, 64px);
+        font-size: clamp(36px, 6vw, 64px);
         font-weight: 800;
-        line-height: 1.1;
+        line-height: 1.15;
         letter-spacing: -0.02em;
         color: var(--black);
         margin-bottom: 16px;
@@ -331,6 +339,7 @@
       /* Hero right: Code showcase */
       .hero-right {
         position: relative;
+        max-width: 640px;
       }
 
       .code-card {
@@ -342,8 +351,7 @@
         font-size: 13px;
         line-height: 1.6;
         color: #e8e8e8;
-        overflow: auto;
-        max-height: 400px;
+        overflow: visible;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
         position: relative;
       }
@@ -390,6 +398,7 @@
       .impact-section {
         padding: 100px 0;
         border-bottom: 1px solid var(--border);
+        scroll-margin-top: var(--nav-height);
       }
 
       .section-label {
@@ -473,6 +482,7 @@
       .experience-section {
         padding: 100px 0;
         border-bottom: 1px solid var(--border);
+        scroll-margin-top: var(--nav-height);
       }
 
       .timeline {
@@ -577,6 +587,7 @@
       .projects-section {
         padding: 100px 0;
         border-bottom: 1px solid var(--border);
+        scroll-margin-top: var(--nav-height);
       }
 
       .projects-grid {
@@ -717,6 +728,7 @@
       .skills-section {
         padding: 100px 0;
         border-bottom: 1px solid var(--border);
+        scroll-margin-top: var(--nav-height);
       }
 
       .skills-grid {
@@ -773,6 +785,7 @@
       .education-section {
         padding: 100px 0;
         border-bottom: 1px solid var(--border);
+        scroll-margin-top: var(--nav-height);
       }
 
       .education-grid {
@@ -963,7 +976,7 @@
       <div class="container">
         <div class="nav-brand">vamsi<span>.</span></div>
         <div class="nav-links">
-          <a href="#work" class="nav-link">Work</a>
+          <a href="#experience" class="nav-link">Work</a>
           <a href="#skills" class="nav-link">Stack</a>
           <a href="#about" class="nav-link">About</a>
           <a href="mailto:vamsimukesh2025@gmail.com" class="nav-cta"
@@ -998,7 +1011,7 @@
                 Let's talk →
               </a>
               <a
-                href="https://linkedin.com/in/vamsi-mukesh"
+                href="https://www.linkedin.com/in/vamsimukesh/"
                 class="btn btn-secondary"
                 target="_blank"
                 rel="noopener"
@@ -1130,7 +1143,7 @@
     </section>
 
     <!-- Experience Section -->
-    <section class="experience-section" id="work">
+    <section class="experience-section" id="experience">
       <div class="container">
         <div class="section-label reveal">Experience</div>
         <h2 class="section-title reveal stagger-1">Where it gets built</h2>
@@ -1171,7 +1184,7 @@
     </section>
 
     <!-- Projects Section -->
-    <section class="projects-section" id="work">
+    <section class="projects-section" id="projects">
       <div class="container">
         <div class="section-label reveal">Projects</div>
         <h2 class="section-title reveal stagger-1">Shipped systems</h2>
@@ -1468,7 +1481,7 @@
             <h3>Connect</h3>
             <div class="footer-links">
               <a
-                href="https://linkedin.com/in/vamsi-mukesh"
+                href="https://www.linkedin.com/in/vamsimukesh/"
                 class="footer-link"
                 target="_blank"
                 rel="noopener"
