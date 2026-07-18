@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vamsi Mukesh — Systems Engineer, Architect</title>
+    <meta
+      name="description"
+      content="Backend systems architect. Designing scalable infrastructure, AI systems, and enterprise platforms. Python, FastAPI, Azure."
+    />
+    <meta
+      property="og:title"
+      content="Vamsi Mukesh — Systems Engineer, Architect"
+    />
+    <meta
+      property="og:description"
+      content="Backend systems architect. Designing scalable infrastructure and AI systems."
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        /* Premium color palette: Warm charcoal + sage + copper */
+        --black: #0a0a0a;
+        --dark: #1a1a1a;
+        --paper: #f8f7f5;
+        --text: #1d1d1d;
+        --text-dim: #5a5a5a;
+        --text-faint: #8a8a8a;
+
+        /* Accent: Warm copper/rose gold */
+        --accent: #c17560;
+        --accent-light: #d4956a;
+        --accent-dark: #9d5a47;
+
+        /* Sage green for secondary accent */
+        --sage: #7a8868;
+        --sage-light: #a8b88a;
+
+        /* Functional colors */
+        --success: #6b8e5c;
+        --warning: #c17560;
+        --error: #c14040;
+
+        /* UI */
+        --border: #e0ddd9;
+        --border-dim: #f0ede8;
+        --overlay: rgba(10, 10, 10, 0.04);
+        --overlay-strong: rgba(10, 10, 10, 0.08);
+
+        /* Typography */
+        --display: "Syne", system-ui;
+        --body: "IBM Plex Serif", Georgia, serif;
+        --mono: "IBM Plex Mono", monospace;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        background: linear-gradient(135deg, var(--paper) 0%, #fafaf8 100%);
+        color: var(--text);
+        font-family: var(--body);
+        line-height: 1.7;
+        overflow-x: hidden;
+        font-size: 16px;
+      }
+
+      /* Subtle grain texture */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' seed='2' /%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      ::selection {
+        background: var(--accent);
+        color: var(--paper);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.25s ease;
+      }
+
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 24px;
+        }
+      }
+
+      /* ============ NAVIGATION ============ */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 56px;
+        background: rgba(248, 247, 245, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-dim);
+        z-index: 1000;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      nav .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      .nav-brand {
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: 18px;
+        letter-spacing: -0.02em;
+        color: var(--black);
+      }
+
+      .nav-brand span {
+        color: var(--accent);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 32px;
+        align-items: center;
+      }
+
+      .nav-link {
+        color: var(--text-dim);
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--accent);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: var(--accent);
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .nav-cta {
+        font-family: var(--display);
+        font-size: 13px;
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        color: var(--text);
+        transition: all 0.25s ease;
+        text-transform: none;
+        letter-spacing: 0;
+        font-weight: 500;
+      }
+
+      .nav-cta:hover {
+        background: var(--accent);
+        color: var(--paper);
+        border-color: var(--accent);
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+      }
+
+      /* ============ HERO ============ */
+      header {
+        padding: 120px 0 80px;
+        margin-top: 56px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .hero-content {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      @media (max-width: 768px) {
+        .hero-content {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+      }
+
+      .hero-left h1 {
+        font-family: var(--display);
+        font-size: clamp(40px, 6vw, 64px);
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: var(--black);
+        margin-bottom: 16px;
+      }
+
+      .hero-left h1 .accent {
+        color: var(--accent);
+        position: relative;
+      }
+
+      .hero-left .subtitle {
+        font-size: 20px;
+        color: var(--text-dim);
+        margin-bottom: 24px;
+        font-weight: 400;
+      }
+
+      .hero-left .description {
+        font-size: 16px;
+        line-height: 1.8;
+        color: var(--text-dim);
+        margin-bottom: 40px;
+        max-width: 520px;
+      }
+
+      .hero-cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        font-family: var(--display);
+        font-size: 14px;
+        font-weight: 600;
+        padding: 12px 24px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--accent);
+        z-index: -1;
+        transition: left 0.3s ease;
+      }
+
+      .btn-primary::before {
+        left: 0;
+      }
+
+      .btn:hover {
+        border-color: var(--accent);
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: var(--paper);
+        border-color: var(--accent);
+      }
+
+      .btn-primary:hover {
+        background: var(--accent-dark);
+        border-color: var(--accent-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(193, 117, 96, 0.15);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--text);
+      }
+
+      .btn-secondary:hover {
+        background: var(--overlay);
+        transform: translateY(-1px);
+      }
+
+      /* Hero right: Code showcase */
+      .hero-right {
+        position: relative;
+      }
+
+      .code-card {
+        background: var(--black);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        padding: 24px;
+        font-family: var(--mono);
+        font-size: 13px;
+        line-height: 1.6;
+        color: #e8e8e8;
+        overflow: auto;
+        max-height: 400px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .code-card::before {
+        content: "○ ○ ○";
+        position: absolute;
+        top: 12px;
+        left: 16px;
+        font-size: 11px;
+        color: #6a6a6a;
+        letter-spacing: 4px;
+      }
+
+      .code-card > div:first-child {
+        margin-top: 20px;
+      }
+
+      .code-line {
+        display: flex;
+        gap: 16px;
+      }
+
+      .code-num {
+        color: #6a6a6a;
+        flex-shrink: 0;
+        user-select: none;
+      }
+
+      .code-key {
+        color: #7fb8f5;
+      }
+      .code-string {
+        color: #e8a33d;
+      }
+      .code-number {
+        color: #57d9a3;
+      }
+      .code-comment {
+        color: #6a6a6a;
+      }
+
+      /* ============ IMPACT SECTION ============ */
+      .impact-section {
+        padding: 100px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .section-label {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
+      }
+
+      .section-title {
+        font-family: var(--display);
+        font-size: clamp(32px, 4vw, 48px);
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        color: var(--black);
+        margin-bottom: 12px;
+      }
+
+      .section-description {
+        font-size: 16px;
+        color: var(--text-dim);
+        max-width: 540px;
+        margin-bottom: 48px;
+      }
+
+      .impact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 24px;
+      }
+
+      .impact-card {
+        background: var(--paper);
+        border: 1px solid var(--border);
+        padding: 32px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .impact-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .impact-card:hover {
+        border-color: var(--accent);
+        background: linear-gradient(135deg, #fafaf8 0%, #f5f2ed 100%);
+      }
+
+      .impact-card:hover::before {
+        opacity: 1;
+      }
+
+      .impact-metric {
+        font-family: var(--display);
+        font-size: 36px;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 8px;
+      }
+
+      .impact-label {
+        font-size: 13px;
+        color: var(--text-dim);
+        line-height: 1.6;
+      }
+
+      /* ============ EXPERIENCE ============ */
+      .experience-section {
+        padding: 100px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .timeline {
+        position: relative;
+        padding-left: 0;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
+        opacity: 0.3;
+      }
+
+      .timeline-item {
+        position: relative;
+        padding-left: 48px;
+        padding-bottom: 64px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -7px;
+        top: 6px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--paper);
+        border: 2px solid var(--accent);
+        transition: all 0.3s ease;
+      }
+
+      .timeline-item:hover::before {
+        transform: scale(1.4);
+        background: var(--accent);
+        box-shadow: 0 0 0 8px rgba(193, 117, 96, 0.1);
+      }
+
+      .timeline-item:last-child {
+        padding-bottom: 0;
+      }
+
+      .timeline-role {
+        font-family: var(--display);
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--black);
+      }
+
+      .timeline-org {
+        font-size: 14px;
+        color: var(--text-dim);
+        font-weight: 500;
+      }
+
+      .timeline-period {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--text-faint);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .timeline-description {
+        font-size: 15px;
+        line-height: 1.7;
+        color: var(--text-dim);
+        margin-top: 12px;
+      }
+
+      .timeline-highlights {
+        list-style: none;
+        margin-top: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .timeline-highlight {
+        font-size: 14px;
+        color: var(--text-dim);
+        padding-left: 16px;
+        position: relative;
+      }
+
+      .timeline-highlight::before {
+        content: "◆";
+        position: absolute;
+        left: 0;
+        color: var(--sage);
+      }
+
+      /* ============ PROJECTS ============ */
+      .projects-section {
+        padding: 100px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+        gap: 32px;
+      }
+
+      @media (max-width: 768px) {
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .project-card {
+        background: var(--paper);
+        border: 1px solid var(--border);
+        padding: 40px;
+        border-radius: 4px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project-card::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(193, 117, 96, 0.05) 0%,
+          transparent 100%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .project-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      }
+
+      .project-card:hover::after {
+        opacity: 1;
+      }
+
+      .project-card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .project-name {
+        font-family: var(--display);
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--black);
+      }
+
+      .project-link {
+        font-family: var(--mono);
+        font-size: 11px;
+        padding: 6px 12px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        color: var(--text-faint);
+        transition: all 0.25s ease;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .project-link:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: rgba(193, 117, 96, 0.05);
+      }
+
+      .project-tech {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--text-faint);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .project-tech span {
+        display: inline-block;
+      }
+
+      .project-description {
+        font-size: 15px;
+        line-height: 1.7;
+        color: var(--text-dim);
+        margin-bottom: 20px;
+      }
+
+      .project-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: auto;
+      }
+
+      .project-item {
+        font-size: 14px;
+        color: var(--text-dim);
+        padding-left: 16px;
+        position: relative;
+        line-height: 1.6;
+      }
+
+      .project-item::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+      }
+
+      /* ============ SKILLS ============ */
+      .skills-section {
+        padding: 100px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+      }
+
+      @media (max-width: 768px) {
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .skill-category {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .skill-category-name {
+        font-family: var(--display);
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .skill-tag {
+        background: var(--overlay);
+        border: 1px solid var(--border);
+        padding: 8px 14px;
+        border-radius: 2px;
+        font-size: 13px;
+        color: var(--text);
+        font-family: var(--mono);
+        transition: all 0.25s ease;
+      }
+
+      .skill-tag:hover {
+        background: var(--overlay-strong);
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      /* ============ EDUCATION ============ */
+      .education-section {
+        padding: 100px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .education-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 32px;
+      }
+
+      .education-card {
+        background: var(--paper);
+        border: 1px solid var(--border);
+        padding: 32px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .education-card:hover {
+        border-color: var(--sage);
+        background: linear-gradient(135deg, #fafaf8 0%, #f5f2ed 100%);
+      }
+
+      .education-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--sage), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        position: relative;
+        bottom: 32px;
+        margin-bottom: 32px;
+      }
+
+      .education-title {
+        font-family: var(--display);
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--black);
+        margin-bottom: 8px;
+      }
+
+      .education-meta {
+        font-size: 13px;
+        color: var(--text-dim);
+        line-height: 1.6;
+      }
+
+      /* ============ FOOTER ============ */
+      footer {
+        padding: 80px 0 60px;
+        border-top: 1px solid var(--border);
+        background: rgba(248, 247, 245, 0.5);
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        margin-bottom: 60px;
+      }
+
+      .footer-section h3 {
+        font-family: var(--display);
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text);
+        margin-bottom: 16px;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .footer-link {
+        font-size: 14px;
+        color: var(--text-dim);
+        position: relative;
+        transition: color 0.25s ease;
+      }
+
+      .footer-link::before {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--accent);
+        transition: width 0.25s ease;
+      }
+
+      .footer-link:hover {
+        color: var(--accent);
+      }
+
+      .footer-link:hover::before {
+        width: 100%;
+      }
+
+      .footer-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 40px 0;
+      }
+
+      .footer-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--text-faint);
+      }
+
+      @media (max-width: 768px) {
+        .footer-meta {
+          flex-direction: column;
+          gap: 16px;
+          text-align: center;
+        }
+      }
+
+      /* ============ ANIMATIONS ============ */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-in {
+        animation: fadeInUp 0.6s ease-out forwards;
+      }
+
+      /* Stagger animation for multiple elements */
+      .stagger-1 {
+        animation-delay: 0.1s;
+      }
+      .stagger-2 {
+        animation-delay: 0.2s;
+      }
+      .stagger-3 {
+        animation-delay: 0.3s;
+      }
+      .stagger-4 {
+        animation-delay: 0.4s;
+      }
+      .stagger-5 {
+        animation-delay: 0.5s;
+      }
+
+      /* Smooth scroll reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Performance: Reduce motion for accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="container">
+        <div class="nav-brand">vamsi<span>.</span></div>
+        <div class="nav-links">
+          <a href="#work" class="nav-link">Work</a>
+          <a href="#skills" class="nav-link">Stack</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="mailto:vamsimukesh2025@gmail.com" class="nav-cta"
+            >Get in touch</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header>
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-left animate-in">
+            <h1>
+              Systems engineer<br />building <span class="accent">reliable</span
+              ><br />infrastructure
+            </h1>
+            <p class="subtitle">
+              Backend architecture, AI systems, scalable infrastructure
+            </p>
+            <p class="description">
+              I architect and ship production-grade systems that process real
+              workloads at scale. Microservices, APIs, LLM systems, and
+              databases that hold 99.9% uptime without breaking a sweat.
+            </p>
+            <div class="hero-cta">
+              <a
+                href="mailto:vamsimukesh2025@gmail.com"
+                class="btn btn-primary"
+              >
+                Let's talk →
+              </a>
+              <a
+                href="https://linkedin.com/in/vamsi-mukesh"
+                class="btn btn-secondary"
+                target="_blank"
+                rel="noopener"
+              >
+                LinkedIn ↗
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-right animate-in stagger-1">
+            <div class="code-card">
+              <div class="code-line">
+                <span class="code-num">1</span>
+                <span><span class="code-key">interface</span> Engineer {</span>
+              </div>
+              <div class="code-line">
+                <span class="code-num">2</span>
+                <span
+                  >&nbsp;&nbsp;<span class="code-key">focus</span>: [<span
+                    class="code-string"
+                    >'systems'</span
+                  >, <span class="code-string">'scale'</span>],</span
+                >
+              </div>
+              <div class="code-line">
+                <span class="code-num">3</span>
+                <span
+                  >&nbsp;&nbsp;<span class="code-key">stack</span>: [<span
+                    class="code-string"
+                    >'Python'</span
+                  >, <span class="code-string">'FastAPI'</span>,
+                  <span class="code-string">'PostgreSQL'</span>,
+                  <span class="code-string">'Azure'</span>],</span
+                >
+              </div>
+              <div class="code-line">
+                <span class="code-num">4</span>
+                <span
+                  >&nbsp;&nbsp;<span class="code-key">status</span>:
+                  <span class="code-string">'open_to_work'</span>,</span
+                >
+              </div>
+              <div class="code-line">
+                <span class="code-num">5</span>
+                <span
+                  >&nbsp;&nbsp;<span class="code-key">metrics</span>: {</span
+                >
+              </div>
+              <div class="code-line">
+                <span class="code-num">6</span>
+                <span
+                  >&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">uptime</span>:
+                  <span class="code-string">'99.9%'</span>,</span
+                >
+              </div>
+              <div class="code-line">
+                <span class="code-num">7</span>
+                <span
+                  >&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key"
+                    >throughput</span
+                  >: <span class="code-number">87</span
+                  ><span class="code-string">% ↑</span>,</span
+                >
+              </div>
+              <div class="code-line">
+                <span class="code-num">8</span>
+                <span
+                  >&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key"
+                    >effort_saved</span
+                  >: <span class="code-number">40</span
+                  ><span class="code-string">% ↓</span></span
+                >
+              </div>
+              <div class="code-line">
+                <span class="code-num">9</span>
+                <span>&nbsp;&nbsp;}</span>
+              </div>
+              <div class="code-line">
+                <span class="code-num">10</span>
+                <span>}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Impact Section -->
+    <section class="impact-section">
+      <div class="container">
+        <div class="section-label reveal">Metrics that matter</div>
+        <h2 class="section-title reveal stagger-1">
+          Scaled systems. Real impact.
+        </h2>
+        <p class="section-description reveal stagger-2">
+          Shipping infrastructure that handles 5+ enterprise applications
+          processing high-volume workloads with architectural simplicity.
+        </p>
+
+        <div class="impact-grid">
+          <div class="impact-card reveal stagger-3">
+            <div class="impact-metric">87%</div>
+            <div class="impact-label">
+              Processing efficiency improvement through optimization and async
+              patterns
+            </div>
+          </div>
+          <div class="impact-card reveal stagger-4">
+            <div class="impact-metric">40%</div>
+            <div class="impact-label">
+              Manual effort reduced via AI-powered microservices and automation
+            </div>
+          </div>
+          <div class="impact-card reveal stagger-5">
+            <div class="impact-metric">99.9%</div>
+            <div class="impact-label">
+              Uptime maintained across production infrastructure and deployments
+            </div>
+          </div>
+          <div class="impact-card reveal">
+            <div class="impact-metric">5+</div>
+            <div class="impact-label">
+              Enterprise applications supported with scalable backend
+              architecture
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience-section" id="work">
+      <div class="container">
+        <div class="section-label reveal">Experience</div>
+        <h2 class="section-title reveal stagger-1">Where it gets built</h2>
+
+        <div class="timeline reveal stagger-2">
+          <div class="timeline-item">
+            <div class="timeline-role">Junior Engineer, Backend Systems</div>
+            <div class="timeline-org">
+              Vishwa Samudra Holdings · Hyderabad, India
+            </div>
+            <div class="timeline-period">Sep 2025 — Present</div>
+            <div class="timeline-description">
+              Production engineering at scale: designing and shipping FastAPI
+              microservices that expose AI-powered workflows to 5+ enterprise
+              applications.
+            </div>
+            <ul class="timeline-highlights">
+              <li>
+                Built production-grade backend services (FastAPI + Python)
+                exposing secure RESTful APIs for enterprise LLM workflows
+              </li>
+              <li>
+                Engineered microservices integrating LLM processing with
+                structured validation pipelines, reducing manual effort by 40%
+              </li>
+              <li>
+                Improved backend performance 87% through async processing,
+                request optimization, and modular architecture
+              </li>
+              <li>
+                Designed optimized SQL schemas with stored procedures, views,
+                and strategic indexing from the ground up
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section" id="work">
+      <div class="container">
+        <div class="section-label reveal">Projects</div>
+        <h2 class="section-title reveal stagger-1">Shipped systems</h2>
+        <p class="section-description reveal stagger-2">
+          End-to-end infrastructure: API layers, data architecture, and AI/LLM
+          systems engineered for production reliability.
+        </p>
+
+        <div class="projects-grid reveal stagger-3">
+          <div class="project-card">
+            <div class="project-header">
+              <div class="project-name">GenAI Security Platform</div>
+              <a
+                href="https://github.com/vamsimukesh7/GenAI-Security-Advisory-Platform"
+                class="project-link"
+                target="_blank"
+                rel="noopener"
+                >GitHub ↗</a
+              >
+            </div>
+            <div class="project-tech">
+              <span>FastAPI</span>
+              <span>LLM</span>
+              <span>RAG</span>
+              <span>Qdrant</span>
+            </div>
+            <p class="project-description">
+              Production GenAI system integrating open-source LLMs (LLaMA,
+              Mistral) with a RAG pipeline for vulnerability intelligence.
+            </p>
+            <ul class="project-list">
+              <li>
+                Built enterprise-grade LLM integration with fallback patterns
+                and hallucination detection
+              </li>
+              <li>
+                Engineered RAG pipeline backed by Qdrant for semantic
+                understanding of security reports
+              </li>
+              <li>
+                Implemented eval frameworks with confidence thresholds and
+                structured outputs
+              </li>
+            </ul>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header">
+              <div class="project-name">Job Matching Portal</div>
+              <a
+                href="https://github.com/vamsimukesh7/Job-Matching-Portal"
+                class="project-link"
+                target="_blank"
+                rel="noopener"
+                >GitHub ↗</a
+              >
+            </div>
+            <div class="project-tech">
+              <span>MERN</span>
+              <span>ML</span>
+              <span>Azure</span>
+              <span>PostgreSQL</span>
+            </div>
+            <p class="project-description">
+              ML-powered matching system fine-tuned on 10k+ resume-job pairs.
+              Scaled to 5,000+ daily requests at 99.9% uptime.
+            </p>
+            <ul class="project-list">
+              <li>
+                Improved accuracy 45% with DistilBERT microservice, validated
+                via A/B testing
+              </li>
+              <li>
+                Reduced latency 70% through Redis caching and connection pooling
+              </li>
+              <li>
+                Achieved 99.9% uptime with Docker, Azure auto-scaling, and
+                horizontal replicas
+              </li>
+            </ul>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header">
+              <div class="project-name">Crowdfunding Platform</div>
+              <a
+                href="https://github.com/vamsimukesh7/Crowd-Funding-Platform"
+                class="project-link"
+                target="_blank"
+                rel="noopener"
+                >GitHub ↗</a
+              >
+            </div>
+            <div class="project-tech">
+              <span>Express</span>
+              <span>React</span>
+              <span>PostgreSQL</span>
+              <span>CI/CD</span>
+            </div>
+            <p class="project-description">
+              Full-stack fundraising platform with payment integration and AI
+              chatbot. Deployed 2–3x weekly with zero downtime.
+            </p>
+            <ul class="project-list">
+              <li>
+                Cut transaction failures 30% with robust error handling and
+                Razorpay integration
+              </li>
+              <li>
+                Achieved 99.9% uptime and rapid deployments via GitHub Actions +
+                Docker + Azure
+              </li>
+              <li>
+                Boosted support response time 40% with Flask/Rasa NLU chatbot
+                for FAQ automation
+              </li>
+            </ul>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header">
+              <div class="project-name">Shopping Assistant AI</div>
+              <a
+                href="https://github.com/vamsimukesh7/Smart_shopping_Assistant_AI"
+                class="project-link"
+                target="_blank"
+                rel="noopener"
+                >GitHub ↗</a
+              >
+            </div>
+            <div class="project-tech">
+              <span>FastAPI</span>
+              <span>LangChain</span>
+              <span>React</span>
+              <span>scikit-learn</span>
+            </div>
+            <p class="project-description">
+              End-to-end AI recommendation system combining classical ML with
+              LLM-powered RAG for personalized product discovery.
+            </p>
+            <ul class="project-list">
+              <li>
+                Integrated sentiment scoring (scikit-learn) with agentic product
+                retrieval
+              </li>
+              <li>
+                Built FastAPI backend with React frontend for REST API
+                integration
+              </li>
+              <li>Containerized with Docker for production deployment</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section" id="skills">
+      <div class="container">
+        <div class="section-label reveal">Stack</div>
+        <h2 class="section-title reveal stagger-1">Tools and technologies</h2>
+
+        <div class="skills-grid reveal stagger-2">
+          <div class="skill-category">
+            <div class="skill-category-name">Backend & APIs</div>
+            <div class="skill-tags">
+              <div class="skill-tag">FastAPI</div>
+              <div class="skill-tag">Python</div>
+              <div class="skill-tag">REST APIs</div>
+              <div class="skill-tag">Microservices</div>
+              <div class="skill-tag">Async/Await</div>
+              <div class="skill-tag">Node.js</div>
+              <div class="skill-tag">Express.js</div>
+              <div class="skill-tag">Java</div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category-name">Data & Storage</div>
+            <div class="skill-tags">
+              <div class="skill-tag">PostgreSQL</div>
+              <div class="skill-tag">SQL Optimization</div>
+              <div class="skill-tag">MySQL</div>
+              <div class="skill-tag">MongoDB</div>
+              <div class="skill-tag">Redis</div>
+              <div class="skill-tag">Azure SQL</div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category-name">AI & ML</div>
+            <div class="skill-tags">
+              <div class="skill-tag">LLM Integration</div>
+              <div class="skill-tag">LangChain</div>
+              <div class="skill-tag">RAG</div>
+              <div class="skill-tag">DistilBERT</div>
+              <div class="skill-tag">scikit-learn</div>
+              <div class="skill-tag">Azure OpenAI</div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category-name">Infrastructure</div>
+            <div class="skill-tags">
+              <div class="skill-tag">Azure App Services</div>
+              <div class="skill-tag">Docker</div>
+              <div class="skill-tag">Kubernetes</div>
+              <div class="skill-tag">GitHub Actions</div>
+              <div class="skill-tag">CI/CD</div>
+              <div class="skill-tag">Terraform</div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category-name">Frontend</div>
+            <div class="skill-tags">
+              <div class="skill-tag">React.js</div>
+              <div class="skill-tag">TypeScript</div>
+              <div class="skill-tag">Angular</div>
+              <div class="skill-tag">HTML/CSS</div>
+              <div class="skill-tag">Redux</div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category-name">Practices</div>
+            <div class="skill-tags">
+              <div class="skill-tag">Systems Design</div>
+              <div class="skill-tag">Scalability</div>
+              <div class="skill-tag">Performance</div>
+              <div class="skill-tag">Security</div>
+              <div class="skill-tag">Testing</div>
+              <div class="skill-tag">Monitoring</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education-section" id="about">
+      <div class="container">
+        <div class="section-label reveal">Background</div>
+        <h2 class="section-title reveal stagger-1">
+          Foundation and recognition
+        </h2>
+
+        <div class="education-grid reveal stagger-2">
+          <div class="education-card">
+            <div class="education-title">B.Tech Computer Science</div>
+            <div class="education-meta">
+              <strong>Vellore Institute of Technology</strong><br />
+              2021 – 2025 · CGPA 8.51 / 10<br />
+              Vellore, India
+            </div>
+          </div>
+
+          <div class="education-card">
+            <div class="education-title">CFC Hackathon Runner-Up</div>
+            <div class="education-meta">
+              Built an AI-powered financial literacy platform with budgeting
+              analytics and investment recommendations.<br />
+              <strong>Vellore Institute of Technology</strong>
+            </div>
+          </div>
+
+          <div class="education-card">
+            <div class="education-title">Leadership & Service</div>
+            <div class="education-meta">
+              Vice Chairperson, Zero Waste Management Club<br />
+              <strong>VIT</strong> — Led campus sustainability initiatives and
+              environmental advocacy
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Get in touch</h3>
+            <div class="footer-links">
+              <a href="mailto:vamsimukesh2025@gmail.com" class="footer-link"
+                >Email</a
+              >
+              <a href="tel:+919347251042" class="footer-link">Phone</a>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h3>Connect</h3>
+            <div class="footer-links">
+              <a
+                href="https://linkedin.com/in/vamsi-mukesh"
+                class="footer-link"
+                target="_blank"
+                rel="noopener"
+                >LinkedIn</a
+              >
+              <a
+                href="https://github.com/vamsimukesh7"
+                class="footer-link"
+                target="_blank"
+                rel="noopener"
+                >GitHub</a
+              >
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h3>Based in</h3>
+            <div class="footer-links">
+              <span class="footer-link">Hyderabad, India</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-meta">
+          <span>© 2026 Vamsi Mukesh. Built for signal clarity.</span>
+          <span>v1.0</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Intersection Observer for scroll reveals
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      // Observe all reveal elements
+      document.querySelectorAll(".reveal").forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Smooth anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      // Add active state to nav links
+      window.addEventListener("scroll", () => {
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          if (pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href").slice(1) === current) {
+            link.classList.add("active");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
